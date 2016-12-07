@@ -2,7 +2,7 @@ version: '2'
 
 services:
   front-end:
-    image: weaveworksdemos/front-end
+    image: paris/sockshop-front-end
     hostname: front-end
     restart: always
     cap_drop:
@@ -193,3 +193,9 @@ services:
     read_only: true
     hostname: user-simulator
     command: "-d 60 -r 200 -c 2 -h edge-router"
+  wishlist:
+    image: paris/sockshop-wishlist
+    cap_drop:
+      - all
+    hostname: wishlist
+    command: bash -c "python wishlist/manage.py migrate && python wishlist/manage.py runserver 0.0.0.0:8000"
